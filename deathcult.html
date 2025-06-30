@@ -1,76 +1,63 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>For pookie 🍓</title>
+  <title>Pookie Confession 💌</title>
   <style>
     body {
-      margin: 0;
+      background-color: #1a1a1a;
       font-family: 'Segoe UI', sans-serif;
-      background: #0f0f0f;
-      color: #eee;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
       text-align: center;
-      padding-top: 80px;
-      overflow-x: hidden;
     }
     h1 {
-      font-size: 3em;
-      animation: float 3s ease-in-out infinite;
-      color: #ff6584;
+      font-size: 2.5em;
+      color: #ff6b81;
+      margin-bottom: 30px;
     }
-    #messageBox {
-      display: none;
-      margin-top: 30px;
-      padding: 20px;
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 12px;
-      backdrop-filter: blur(5px);
-      border: 1px solid #ff6584;
-      max-width: 90%;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    p {
-      font-size: 1.2em;
-      margin: 12px 0;
-      color: #ffcfe2;
+    .btns {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
     }
     button {
-      padding: 12px 28px;
+      padding: 15px 40px;
+      font-size: 1.2em;
       border: none;
-      background-color: #ff6584;
-      color: white;
-      font-size: 1.1em;
-      border-radius: 20px;
+      border-radius: 12px;
       cursor: pointer;
-      transition: background 0.3s, transform 0.2s;
+      transition: 0.3s;
     }
-    button:hover {
-      background-color: #ff4366;
-      transform: scale(1.05);
+    .yes {
+      background-color: #ff6b81;
+      color: white;
+      font-size: 1.6em;
+      transform: scale(1.1);
     }
-    .glitch {
-      animation: glitch 1s infinite;
+    .yes:hover {
+      background-color: #ff4757;
+      transform: scale(1.15);
     }
-    @keyframes glitch {
-      0% { text-shadow: 2px 2px red; }
-      20% { text-shadow: -2px -2px blue; }
-      40% { text-shadow: 2px -2px lime; }
-      60% { text-shadow: -2px 2px purple; }
-      80% { text-shadow: 2px 0 yellow; }
-      100% { text-shadow: 0 2px cyan; }
+    .no {
+      background-color: #555;
+      color: white;
     }
-    .heart {
-      position: absolute;
-      color: #ff6584;
+    .no:hover {
+      background-color: #333;
+    }
+    .hearts {
       font-size: 2rem;
-      animation: floatUp 4s infinite ease-in;
-      opacity: 0.7;
-    }
-    @keyframes floatUp {
-      0% { transform: translateY(100vh); opacity: 0; }
-      50% { opacity: 1; }
-      100% { transform: translateY(-10vh); opacity: 0; }
+      animation: float 3s ease-in-out infinite;
+      color: #ff6b81;
+      margin-top: 20px;
     }
     @keyframes float {
       0%, 100% { transform: translateY(0); }
@@ -79,26 +66,37 @@
   </style>
 </head>
 <body>
-  <h1 class="glitch">Hey pookie 🍓</h1>
-  <button onclick="showMessage()">Tap to Unlock 🍓</button>  <div id="messageBox">
-    <p>Welcome to the secret file of 🍓 aka the chaos queen.</p>
-    <p>Your lil bro pookie was here first 🫡</p>
-    <p>You’re the kind of person who makes everything feel a little less boring.</p>
-    <p>Stay weird. Stay wild. Stay well 💜</p>
-    <p>(Also yes, I saved this whole thing just to make you smile 💀)</p>
-  </div>  <script>
-    function showMessage() {
-      document.getElementById('messageBox').style.display = 'block';
+
+  <h1 id="question">Will you be my online girlfriend? 💗</h1>
+  <div class="btns" id="buttons">
+    <button class="yes" onclick="yes()">Yes 💞</button>
+    <button class="no" onclick="no()">No 💀</button>
+  </div>
+  <div class="hearts" id="hearts">❤️ 💖 💘 💝 💗 💞 💓</div>
+
+  <script>
+    let secondChance = false;
+
+    function yes() {
+      document.body.innerHTML = `
+        <h1 style="color: #ff6b81">We are officially boyfriend & girlfriend now 💘</h1>
+        <p style="font-size: 1.3em; color: #ffcbd1; margin-top: 15px;">You're stuck with me now 😈💕<br>Let the chaotic cute adventures begin!</p>
+        <div style="font-size: 2rem; margin-top: 25px;">❤️ 💖 💘 💝 💗 💞 💓</div>
+      `;
     }
 
-    for (let i = 0; i < 25; i++) {
-      const heart = document.createElement('div');
-      heart.classList.add('heart');
-      heart.innerHTML = '❤️';
-      heart.style.left = Math.random() * 100 + 'vw';
-      heart.style.animationDuration = (2 + Math.random() * 3) + 's';
-      heart.style.fontSize = (1 + Math.random() * 2) + 'rem';
-      document.body.appendChild(heart);
+    function no() {
+      if (!secondChance) {
+        document.getElementById('question').textContent = 'Are you sure? 😢';
+        secondChance = true;
+      } else {
+        document.body.innerHTML = `
+          <h1 style="color: #aaa">Okay... maybe another time 🥲</h1>
+          <p style="font-size: 1.3em; color: #ccc; margin-top: 15px;">Pookie still respects your decision 💔</p>
+        `;
+      }
     }
-  </script></body>
+  </script>
+
+</body>
 </html>
